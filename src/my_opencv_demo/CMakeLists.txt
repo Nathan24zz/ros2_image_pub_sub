@@ -40,7 +40,7 @@ add_executable(minimal_opencv_ros2_node src/minimal_opencv_ros2_node.cpp)
 ament_target_dependencies(minimal_opencv_ros2_node rclcpp std_msgs sensor_msgs cv_bridge image_transport OpenCV my_opencv_demo_interfaces)
 
 add_executable(my_sub src/my_sub.cpp)
-ament_target_dependencies(my_sub rclcpp std_msgs sensor_msgs my_opencv_demo_interfaces)
+ament_target_dependencies(my_sub rclcpp std_msgs sensor_msgs my_opencv_demo_interfaces OpenCV cv_bridge)
 
 install(TARGETS
    minimal_opencv_ros2_node
