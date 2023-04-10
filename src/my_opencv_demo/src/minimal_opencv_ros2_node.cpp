@@ -18,7 +18,7 @@ public:
         publisher_ =
             this->create_publisher<my_opencv_demo_interfaces::msg::ImageWithTime>("random_image", 10);
         timer_ = this->create_wall_timer(
-            300ms, std::bind(&MinimalImagePublisher::timer_callback, this));
+            120ms, std::bind(&MinimalImagePublisher::timer_callback, this));
     }
 
 private:
