@@ -24,6 +24,7 @@ find_package(cv_bridge REQUIRED)
 find_package(image_transport REQUIRED)
 find_package(OpenCV REQUIRED)
 find_package(my_opencv_demo_interfaces REQUIRED)
+find_package(shisen_interfaces REQUIRED)
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
@@ -37,14 +38,18 @@ if(BUILD_TESTING)
 endif()
 
 add_executable(minimal_opencv_ros2_node src/minimal_opencv_ros2_node.cpp)
-ament_target_dependencies(minimal_opencv_ros2_node rclcpp std_msgs sensor_msgs cv_bridge image_transport OpenCV my_opencv_demo_interfaces)
+ament_target_dependencies(minimal_opencv_ros2_node rclcpp std_msgs sensor_msgs cv_bridge image_transport OpenCV my_opencv_demo_interfaces shisen_interfaces)
+
+add_executable(shisen_pub src/shisen_pub.cpp)
+ament_target_dependencies(shisen_pub rclcpp std_msgs sensor_msgs cv_bridge image_transport OpenCV my_opencv_demo_interfaces shisen_interfaces)
 
 add_executable(my_sub src/my_sub.cpp)
-ament_target_dependencies(my_sub rclcpp std_msgs sensor_msgs my_opencv_demo_interfaces OpenCV cv_bridge)
+ament_target_dependencies(my_sub rclcpp std_msgs sensor_msgs my_opencv_demo_interfaces OpenCV cv_bridge shisen_interfaces)
 
 install(TARGETS
    minimal_opencv_ros2_node
    my_sub
+   shisen_pub
    DESTINATION lib/${PROJECT_NAME}
  )
 

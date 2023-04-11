@@ -16,6 +16,7 @@
   <depend>image_transport</depend>
   <depend>OpenCV</depend>
   <depend>my_opencv_demo_interfaces</depend>
+  <depend>shisen_interfaces</depend>
 
   <test_depend>ament_lint_auto</test_depend>
   <test_depend>ament_lint_common</test_depend>

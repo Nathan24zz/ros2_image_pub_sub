@@ -14,6 +14,7 @@
   <exec_depend>my_opencv_demo_interfaces</exec_depend>
   <exec_depend>cv_bridge</exec_depend>
   <exec_depend>ninshiki_interfaces</exec_depend>
+  <exec_depend>shisen_interfaces</exec_depend>
 
   <test_depend>ament_copyright</test_depend>
   <test_depend>ament_flake8</test_depend>

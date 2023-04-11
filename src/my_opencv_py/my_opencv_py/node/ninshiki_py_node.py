@@ -26,6 +26,7 @@ import time
 
 from ninshiki_interfaces.msg import DetectedObjects
 from my_opencv_demo_interfaces.msg import ImageWithTime
+from shisen_interfaces.msg import Image
 # from my_opencv_py.detector.tflite import TfLite
 from my_opencv_py.detector.yolo import Yolo
 from cv_bridge import CvBridge
@@ -44,8 +45,14 @@ class NinshikiPyNode:
         self.image_subscription = self.node.create_subscription(
             ImageWithTime, self.topic_name, self.listener_callback, 10)
         self.node.get_logger().info(
-            "----------subscribe image on "
+            "subscribe image on "
             + self.image_subscription.topic_name)
+
+        self.image_subscription_shisen = self.node.create_subscription(
+            Image, self.topic_name, self.listener_callback_shisen, 10)
+        self.node.get_logger().info(
+            "--subscribe image shisen on "
+            + self.image_subscription_shisen.topic_name)
 
         self.detected_object_publisher = self.node.create_publisher(
             DetectedObjects, self.node.get_name() + "/detection", 10)
@@ -77,6 +84,26 @@ class NinshikiPyNode:
         #     else:
         #         self.received_frame = cv2.imdecode(
         #             self.received_frame, cv2.IMREAD_UNCHANGED)
+
+    def listener_callback_shisen(self, message: MsgType):
+        # self.time = message.time
+        # print("get image: ", int(round(time.time() * 1000)) - self.time, " ms")
+        self.time = message.time
+        print("get image: ", int(round(time.time() * 1000)) - self.time, " ms")
+        if (message.data != []):
+            self.time = int(round(time.time() * 1000))
+            self.received_frame = np.array(message.data)
+            self.received_frame = np.frombuffer(
+                self.received_frame, dtype=np.uint8)
+
+            # Raw Image
+            if (message.quality < 0):
+                self.received_frame = self.received_frame.reshape(
+                    message.rows, message.cols, 3)
+            # Compressed Image
+            else:
+                self.received_frame = cv2.imdecode(
+                    self.received_frame, cv2.IMREAD_UNCHANGED)
 
     def publish(self):
         # pass
