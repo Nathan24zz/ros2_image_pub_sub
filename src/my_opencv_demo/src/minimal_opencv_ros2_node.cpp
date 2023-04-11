@@ -2,9 +2,8 @@
 #include "sensor_msgs/msg/image.hpp"
 #include "std_msgs/msg/header.hpp"
 #include <chrono>
-#include <cv_bridge/cv_bridge.h>               // cv_bridge converts between ROS 2 image messages and OpenCV image representations.
-#include <image_transport/image_transport.hpp> // Using image_transport allows us to publish and subscribe to compressed image streams in ROS2
-#include <opencv2/opencv.hpp>                  // We include everything about OpenCV as we don't care much about compilation time at the moment.
+#include <cv_bridge/cv_bridge.h> // cv_bridge converts between ROS 2 image messages and OpenCV image representations.
+#include <opencv2/opencv.hpp>    // We include everything about OpenCV as we don't care much about compilation time at the moment.
 #include <ctime>
 #include "my_opencv_demo_interfaces/msg/image_with_time.hpp"
 
